@@ -1,0 +1,18 @@
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: gitlab
+  namespace: gitlab-system
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  port:
+    targetPort: http-workhorse
+  tls:
+    termination: edge
+  to:
+    kind: Service
+    name: gitlab-webservice-default
+    weight: 100
+  wildcardPolicy: None

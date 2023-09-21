@@ -1,0 +1,23 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: demo-platform
+  namespace: openshift-gitops
+spec:
+  clusterResourceBlacklist:
+    - group: ''
+      kind: ''
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  description: demo-platform
+  destinations:
+    - name: '*'
+      namespace: '*'
+      server: '*'
+  namespaceResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  sourceRepos:
+    - '*'

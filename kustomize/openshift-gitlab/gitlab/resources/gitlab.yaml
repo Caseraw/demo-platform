@@ -1,0 +1,19 @@
+---
+apiVersion: apps.gitlab.com/v1beta1
+kind: GitLab
+metadata:
+  name: gitlab
+  namespace: gitlab-system
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+spec:
+  chart:
+    values:
+      certmanager:
+        install: false
+      global:
+        hosts:
+          domain: example.com
+        ingress:
+          configureCertmanager: false
+    version: 7.3.3

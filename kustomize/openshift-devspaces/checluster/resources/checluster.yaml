@@ -1,0 +1,54 @@
+---
+apiVersion: org.eclipse.che/v2
+kind: CheCluster
+metadata:
+  name: devspaces
+  namespace: openshift-devspaces
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+  finalizers:
+    - checluster.che.eclipse.org
+    - cluster-resources.finalizers.che.eclipse.org
+    - cheGateway.clusterpermissions.finalizers.che.eclipse.org
+    - oauthclients.finalizers.che.eclipse.org
+    - dashboard.clusterpermissions.finalizers.che.eclipse.org
+    - container-build.finalizers.che.eclipse.org
+    - consolelink.finalizers.che.eclipse.org
+spec:
+  components:
+    cheServer:
+      debug: false
+      logLevel: INFO
+    dashboard: {}
+    database:
+      externalDb: false
+    devWorkspace: {}
+    devfileRegistry: {}
+    imagePuller:
+      enable: false
+      spec: {}
+    metrics:
+      enable: true
+    pluginRegistry: {}
+  containerRegistry: {}
+  devEnvironments:
+    startTimeoutSeconds: 300
+    secondsOfRunBeforeIdling: -1
+    maxNumberOfWorkspacesPerUser: -1
+    containerBuildConfiguration:
+      openShiftSecurityContextConstraint: container-build
+    maxNumberOfRunningWorkspacesPerUser: -1
+    deploymentStrategy: Recreate
+    defaultNamespace:
+      autoProvision: true
+      template: devspaces-<username>
+    secondsOfInactivityBeforeIdling: -1
+    storage:
+      pvcStrategy: per-workspace
+  gitServices: {}
+  networking:
+    auth:
+      gateway:
+        configLabels:
+          app: che
+          component: che-gateway-config
