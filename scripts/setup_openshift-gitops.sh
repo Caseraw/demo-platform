@@ -37,11 +37,11 @@ display_message "show-date" "INFO" "OpenShift GitOps" "Checking GitOps ArgoCD in
 run_command --infinite -- oc -n openshift-gitops wait ArgoCD openshift-gitops --for=jsonpath='{.status.phase}'=Available
 run_command --infinite -- oc -n openshift-gitops wait ArgoCD openshift-gitops --for=jsonpath='{.status.applicationController}'=Running
 run_command --infinite -- oc -n openshift-gitops wait ArgoCD openshift-gitops --for=jsonpath='{.status.applicationSetController}'=Running
-run_command --infinite -- oc -n openshift-gitops wait ArgoCD openshift-gitops --for=jsonpath='{.status.dex}'=Running
+#run_command --infinite -- oc -n openshift-gitops wait ArgoCD openshift-gitops --for=jsonpath='{.status.dex}'=Running
 run_command --infinite -- oc -n openshift-gitops wait ArgoCD openshift-gitops --for=jsonpath='{.status.redis}'=Running
 run_command --infinite -- oc -n openshift-gitops wait ArgoCD openshift-gitops --for=jsonpath='{.status.repo}'=Running
 run_command --infinite -- oc -n openshift-gitops wait ArgoCD openshift-gitops --for=jsonpath='{.status.server}'=Running
-run_command --infinite -- oc -n openshift-gitops wait ArgoCD openshift-gitops --for=jsonpath='{.status.ssoConfig}'=Success
+#run_command --infinite -- oc -n openshift-gitops wait ArgoCD openshift-gitops --for=jsonpath='{.status.ssoConfig}'=Success
 
 # Check ArgoCD instance workload state
 display_message "show-date" "INFO" "OpenShift GitOps" "Checking GitOps ArgoCD instance workload state"
