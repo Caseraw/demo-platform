@@ -22,3 +22,8 @@ RUN wget -O oc.tar.gz https://mirror.openshift.com/pub/openshift-v4/x86_64/clien
     rm oc.tar.gz oc kubectl README.md && \
     oc completion bash > oc_bash_completion && \
     cp oc_bash_completion /etc/bash_completion.d/
+
+# Add .bashrc file to user's home directory
+COPY files/.bashrc /root/.bashrc
+
+USER root

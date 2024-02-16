@@ -19,6 +19,6 @@
 			"terminal.integrated.shell.linux": "/bin/bash"
 		}
 	  },
-	// "postCreateCommand": "",
+	// "postCreateCommand": "bash scripts/postcommands.sh",
     "remoteUser": "root"
 }
