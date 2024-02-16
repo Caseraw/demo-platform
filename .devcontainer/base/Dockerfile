@@ -10,6 +10,7 @@ RUN apt-get update && \
         bash-completion \
         git \
         wget \
+        jq \
         curl && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
