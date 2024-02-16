@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/env bash
 
 # Load additional functions
 source lib/display_message.sh

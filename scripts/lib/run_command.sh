@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/env bash
 
 # The actual main function of this file
 run_command() {

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/env bash
 
 # Color Code Constants
 GRAY="\033[37m"

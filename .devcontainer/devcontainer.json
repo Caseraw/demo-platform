@@ -1,0 +1,24 @@
+{
+	"name": "Demo Platform - Base",
+    "build": {
+        "dockerfile": "./base/Dockerfile"
+    },
+	"customizations": {
+		"vscode": {
+		  "extensions": [
+			"streetsidesoftware.code-spell-checker",
+			"stkb.rewrap",
+			"eamodio.gitlens",
+			"redhat.vscode-yaml",
+			"mhutchie.git-graph",
+			"hookyqr.beautify",
+			"yzhang.markdown-all-in-one",
+			"vs-publisher-1448185.keyoti-changeallendoflinesequence"
+			],
+		"settings": { 
+			"terminal.integrated.shell.linux": "/bin/bash"
+		}
+	  },
+	// "postCreateCommand": "",
+    "remoteUser": "root"
+}
