@@ -16,4 +16,4 @@ spec:
           domain: example.com
         ingress:
           configureCertmanager: false
-    version: 7.3.3
+    version: 7.9.0
