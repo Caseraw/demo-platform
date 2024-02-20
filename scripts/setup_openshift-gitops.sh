@@ -27,7 +27,7 @@ crds=(
 for crd in "${crds[@]}"; do
   display_message "show-date" "INFO" "OpenShift GitOps" "CRD: $crd, exists"
   if ! echo "$all_crds" | grep -q "$crd"; then
-    display_message "show-date" "CRITICAL" "OpenShift GitOps" "CRD: $crd, missing!"applicationSetController
+    display_message "show-date" "CRITICAL" "OpenShift GitOps" "CRD: $crd, missing!"
     exit 1
   fi
 done
