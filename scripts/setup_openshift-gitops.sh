@@ -58,7 +58,7 @@ run_command -- oc apply -k ../kustomize/openshift-gitops/config
 
 # Add GitOps ArgoCD Operator and Confiog as an App
 display_message "show-date" "INFO" "Add GitOps ArgoCD Operator and Confiog as an App" "Applying kustomize resources"
-run_command -- oc apply -k ../kustomize/openshift-gitops/app
+run_command -- oc apply -k ../kustomize/openshift-cluster-config
 
 # End of checks
 display_message "show-date" "INFO" "OpenShift GitOps" "All systems are go for OpenShift GitOps!"
