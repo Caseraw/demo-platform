@@ -1,0 +1,58 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: color-race-game
+  labels:
+    app: color-race-game
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: color-race-game
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: color-race-game
+    spec:
+      containers:
+      - image: docker.io/nginxinc/nginx-unprivileged:1.25.4
+        imagePullPolicy: IfNotPresent
+        name: nginx-ingress
+        ports:
+          - containerPort: 80
+        volumeMounts:
+          - name: page
+            mountPath: /usr/share/nginx/html/index.html
+            subPath: index.html
+          - name: bgcolor
+            mountPath: /usr/share/nginx/html/js/bgcolor.js
+            subPath: bgcolor.js
+          - name: game-logic
+            mountPath: /usr/share/nginx/html/js/game-logic.js
+            subPath: game-logic.js
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+      volumes:
+        - name: page
+          configMap:
+            name: page
+        - name: bgcolor
+          configMap:
+            name: bgcolor
+        - name: game-logic
+          configMap:
+            name: game-logic

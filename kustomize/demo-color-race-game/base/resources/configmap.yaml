@@ -1,0 +1,189 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: bgcolor
+data:
+  bgcolor.js: |
+    var bgColor = "white"; // Set your desired default color here
+    document.body.style.backgroundColor = bgColor;
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: page
+data:
+  index.html: |
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Color Race Game!</title>
+        <!-- Bootstrap CSS -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Roboto+Slab:wght@500&display=swap" rel="stylesheet">
+    </head>
+    <body>
+      <div class="container text-center mt-5">
+        <h1>Color Race Game!</h1>
+        <div class="mt-4" style="font-size: 18px; font-family: 'Roboto Slab', serif;">Set the background color before it's too late!</div>
+        <div class="mt-4" style="font-size: 32px; font-family: 'Roboto Slab', serif;">😨⌛</div>
+        <div id="timer" style="font-size: 96px; font-family: 'Raleway', sans-serif;">--</div>
+        <div id="message" class="mt-4" style="font-size: 24px; font-family: 'Roboto Slab', serif;"></div>
+        <div class="btn-group mt-3">
+            <button id="stopGameButton" onclick="stopGame()" class="btn btn-warning">Stop Game</button>
+            <button id="clearRestartButton" onclick="resetGame()" class="btn btn-danger">Clear & Restart</button>
+        </div>
+      </div>
+      <!-- Game timer -->
+      <script src="/js/bgcolor.js"></script>
+      <script src="/js/game-logic.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </body>
+    </html>
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: game-logic
+data:
+  game-logic.js: |
+    let counter = parseInt(localStorage.getItem('timer'), 10);
+    let attempts = parseInt(localStorage.getItem('attempts'), 10);
+    let storedMessage = localStorage.getItem('gameMessage');
+    let chosenColor = localStorage.getItem('chosenColor');
+    let interval;
+    let reloadCheck = localStorage.getItem('reloadCheck');
+    let gameStopped = false;
+
+    const colors = ["red", "blue", "green", "yellow", "purple", "orange", "pink", "brown", "cyan", "lime"];
+
+    const colorToRGB = {
+        "red": "rgb(255, 0, 0)",
+        "blue": "rgb(0, 0, 255)",
+        "green": "rgb(0, 128, 0)",
+        "yellow": "rgb(255, 255, 0)",
+        "purple": "rgb(128, 0, 128)",
+        "orange": "rgb(255, 165, 0)",
+        "pink": "rgb(255, 192, 203)",
+        "brown": "rgb(165, 42, 42)",
+        "cyan": "rgb(0, 255, 255)",
+        "lime": "rgb(50, 205, 50)"
+    };
+
+    if (!chosenColor) {
+        chosenColor = colors[Math.floor(Math.random() * colors.length)];
+        localStorage.setItem('chosenColor', chosenColor);
+    }
+
+    if (isNaN(counter) || isNaN(attempts)) {
+        counter = 60;
+        localStorage.setItem('timer', counter);
+        attempts = 0;
+        localStorage.setItem('attempts', attempts);
+        storedMessage = "Change the background color to " + chosenColor + "!";
+        localStorage.setItem('gameMessage', storedMessage);
+    }
+
+    const timerElement = document.getElementById('timer');
+    const messageElement = document.getElementById('message');
+    const resetButton = document.getElementById('resetButton');
+
+    timerElement.textContent = counter;
+    messageElement.textContent = storedMessage || "";
+
+    function stopGame() {
+        if (!gameStopped) {
+            clearInterval(interval);  // Pause the timer
+            gameStopped = true;
+            document.getElementById('stopGameButton').textContent = "Resume Game";
+        } else {
+            // Resume the game
+            interval = setInterval(updateTimer, 1000);
+            gameStopped = false;
+            document.getElementById('stopGameButton').textContent = "Stop Game";
+        }
+    }
+
+    function resetGame() {
+        // Clear all local storage values related to the game
+        localStorage.removeItem('timer');
+        localStorage.removeItem('attempts');
+        localStorage.removeItem('gameMessage');
+        localStorage.removeItem('chosenColor');
+        localStorage.removeItem('reloadCheck');
+        
+        // Delay the page reload by 100 milliseconds to ensure local storage values are cleared
+        setTimeout(() => {
+            location.reload();
+        }, 100);
+    }
+
+    function updateMessage(message) {
+        messageElement.textContent = message;
+        localStorage.setItem('gameMessage', message);
+    }
+
+    function checkBackgroundColor() {
+        const currentColor = window.getComputedStyle(document.body).backgroundColor;
+
+        // If we're performing a reload check
+        if (reloadCheck) {
+            if (currentColor === reloadCheck && currentColor === colorToRGB[chosenColor]) {
+                clearInterval(interval);
+                updateMessage("You win! 😎🚀✨");
+            } else {
+                clearInterval(interval);
+                updateMessage("Busted! 😱 Cheating detected 👮😭");
+                localStorage.removeItem('reloadCheck'); // Clean up after verification
+            }
+        } else if (currentColor === colorToRGB[chosenColor]) {
+            localStorage.setItem('reloadCheck', currentColor);  // Store the initial check
+            location.reload();  // Trigger a reload
+        }
+    }
+
+    if (attempts >= 3) {
+        timerElement.textContent = '--';
+        updateMessage("GAME OVER!");
+        resetButton.style.display = 'block';
+        resetButton.classList.remove('d-none');
+    } else {
+        function updateTimer() {
+            if (!gameStopped) { // Only run timer updates if the game isn't stopped
+                checkBackgroundColor();
+                
+                counter--;
+                localStorage.setItem('timer', counter);
+                timerElement.textContent = counter;
+
+                if (counter <= 0) {
+                    counter = 60;
+                    localStorage.setItem('timer', counter);
+                    attempts++;
+                    localStorage.setItem('attempts', attempts);
+
+                    switch (attempts) {
+                        case 1:
+                            updateMessage("First attempt FAILED! Try again, 2 attempts left! (Target color: " + chosenColor + ")");
+                            break;
+                        case 2:
+                            updateMessage("Second attempt FAILED! Try again, 1 attempt left! (Target color: " + chosenColor + ")");
+                            break;
+                        case 3:
+                            updateMessage("GAME OVER! 😵😤🤬");
+                            resetButton.style.display = 'block';
+                            resetButton.classList.remove('d-none');
+                            clearInterval(interval);
+                            return;
+                    }
+                }
+            }
+        }
+
+        interval = setInterval(updateTimer, 1000);
+    }
