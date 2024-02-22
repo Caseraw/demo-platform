@@ -6,6 +6,8 @@ metadata:
   namespace: openshift-operators
   annotations:
     argocd.argoproj.io/sync-wave: "-1"
+  labels:
+    app.kubernetes.io/instance: cert-manager
 spec:
   channel: stable
   installPlanApproval: Automatic
