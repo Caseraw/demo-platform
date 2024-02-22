@@ -6,6 +6,8 @@ metadata:
   namespace: openshift-devspaces
   annotations:
     argocd.argoproj.io/sync-wave: "-1"
+  labels:
+    app.kubernetes.io/instance: openshift-devspaces
   finalizers:
     - checluster.che.eclipse.org
     - cluster-resources.finalizers.che.eclipse.org
@@ -19,9 +21,8 @@ spec:
     cheServer:
       debug: false
       logLevel: INFO
-    dashboard: {}
-    database:
-      externalDb: false
+    dashboard:
+      logLevel: ERROR
     devWorkspace: {}
     devfileRegistry: {}
     imagePuller:
@@ -32,17 +33,18 @@ spec:
     pluginRegistry: {}
   containerRegistry: {}
   devEnvironments:
-    startTimeoutSeconds: 300
-    secondsOfRunBeforeIdling: -1
-    maxNumberOfWorkspacesPerUser: -1
     containerBuildConfiguration:
       openShiftSecurityContextConstraint: container-build
-    maxNumberOfRunningWorkspacesPerUser: -1
-    deploymentStrategy: Recreate
     defaultNamespace:
       autoProvision: true
       template: devspaces-<username>
+    deploymentStrategy: Recreate
+    maxNumberOfRunningWorkspacesPerUser: -1
+    maxNumberOfWorkspacesPerUser: -1
     secondsOfInactivityBeforeIdling: -1
+    secondsOfRunBeforeIdling: -1
+    security: {}
+    startTimeoutSeconds: 300
     storage:
       pvcStrategy: per-workspace
   gitServices: {}

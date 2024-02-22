@@ -5,6 +5,8 @@ metadata:
   name: openshift-devspaces
   annotations:
     argocd.argoproj.io/sync-wave: "-1"
+  labels:
+    app.kubernetes.io/instance: openshift-devspaces
 ---
 apiVersion: v1
 kind: Namespace
@@ -12,3 +14,5 @@ metadata:
   name: openshift-terminal
   annotations:
     argocd.argoproj.io/sync-wave: "-1"
+  labels:
+    app.kubernetes.io/instance: openshift-devspaces

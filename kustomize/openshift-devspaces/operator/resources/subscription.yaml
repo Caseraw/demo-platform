@@ -6,6 +6,8 @@ metadata:
   namespace: openshift-operators
   annotations:
     argocd.argoproj.io/sync-wave: "-1"
+  labels:
+    app.kubernetes.io/instance: openshift-devspaces
 spec:
   channel: stable
   installPlanApproval: Automatic
@@ -20,6 +22,8 @@ metadata:
   namespace: openshift-operators
   annotations:
     argocd.argoproj.io/sync-wave: "-1"
+  labels:
+    app.kubernetes.io/instance: openshift-devspaces
 spec:
   channel: fast
   installPlanApproval: Automatic
