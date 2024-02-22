@@ -5,7 +5,7 @@ metadata:
   name: devspaces
   namespace: openshift-devspaces
   annotations:
-    argocd.argoproj.io/sync-wave: "0"
+    argocd.argoproj.io/sync-wave: "-1"
   finalizers:
     - checluster.che.eclipse.org
     - cluster-resources.finalizers.che.eclipse.org
