@@ -57,8 +57,8 @@ display_message "show-date" "INFO" "Configure GitOps ArgoCD" "Applying kustomize
 run_command -- oc apply -k ../kustomize/openshift-gitops/config
 
 # Add GitOps ArgoCD app-of-apps
-display_message "show-date" "INFO" "Add GitOps ArgoCD app-of-apps" "Applying kustomize resources"
-run_command -- oc apply -k ../kustomize/openshift-cluster-config/app-of-apps
+display_message "show-date" "INFO" "Add GitOps ArgoCD app-of-apps" "Applying cluster config app-of-apps"
+run_command -- oc apply ../kustomize/openshift-cluster-config/app-of-apps/app-of-apps.yaml
 
 # End of checks
 display_message "show-date" "INFO" "OpenShift GitOps" "All systems are go for OpenShift GitOps!"
