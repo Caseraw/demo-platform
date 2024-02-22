@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   - resources/app-openshift-gitops.yaml
   - resources/app-openshift-devspaces.yaml
-  - resources/app-openshift-cert-manager.yaml
+
