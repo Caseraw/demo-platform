@@ -1,0 +1,19 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: openshift-devspaces
+  namespace: openshift-gitops
+spec:
+  destination:
+    name: ''
+    namespace: openshift-gitops
+    server: 'https://kubernetes.default.svc'
+  project: cluster-config
+  sources:
+    - path: kustomize/openshift-devspaces/operator
+      repoURL: 'https://github.com/Caseraw/demo-platform.git'
+      targetRevision: HEAD
+    - path: kustomize/openshift-devspaces/config
+      repoURL: 'https://github.com/Caseraw/demo-platform.git'
+      targetRevision: HEAD

@@ -36,8 +36,8 @@ for crd in "${crds[@]}"; do
 done
 
 # Install CheCluster
-display_message "show-date" "INFO" "DevSpaces Operator" "Applying CheCluster resource"
-run_command -- oc apply -k ../kustomize/openshift-devspaces/checluster
+display_message "show-date" "INFO" "DevSpaces Operator" "Applying config resources"
+run_command -- oc apply -k ../kustomize/openshift-devspaces/config
 
 # Check CheCluster
 display_message "show-date" "INFO" "DevSpaces Operator" "Checking CheCluster state"
