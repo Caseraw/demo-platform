@@ -4,6 +4,8 @@ kind: AppProject
 metadata:
   name: cluster-config
   namespace: openshift-gitops
+  labels:
+    app.kubernetes.io/instance: openshift-gitops
 spec:
   clusterResourceBlacklist:
     - group: ''
