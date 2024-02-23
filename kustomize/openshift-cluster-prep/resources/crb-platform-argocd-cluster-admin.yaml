@@ -5,6 +5,12 @@ metadata:
   name: platform-argocd-cluster-admin
 subjects:
   - kind: ServiceAccount
+    name: openshift-gitops-argocd-application-controller
+    namespace: openshift-gitops
+  - kind: ServiceAccount
+    name: popenshift-gitops-applicationset-controller
+    namespace: openshift-gitops
+  - kind: ServiceAccount
     name: platform-argocd-argocd-application-controller
     namespace: platform-argocd
   - kind: ServiceAccount

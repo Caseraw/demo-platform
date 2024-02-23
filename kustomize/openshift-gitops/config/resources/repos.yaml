@@ -5,6 +5,7 @@ metadata:
   name: github-platform-repo-platform-argocd
   namespace: openshift-gitops
   labels:
+    app.kubernetes.io/instance: openshift-gitops
     argocd.argoproj.io/secret-type: repo-creds
   annotations:
     managed-by: argocd.argoproj.io
