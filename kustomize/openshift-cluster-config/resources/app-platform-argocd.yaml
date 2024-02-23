@@ -1,0 +1,16 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: platform-argocd
+  namespace: openshift-gitops
+spec:
+  destination:
+    name: ''
+    namespace: openshift-gitops
+    server: 'https://kubernetes.default.svc'
+  project: cluster-config
+  source:
+    path: kustomize/platform-argocd
+    repoURL: 'https://github.com/Caseraw/demo-platform.git'
+    targetRevision: HEAD
