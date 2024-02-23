@@ -4,6 +4,8 @@ kind: Application
 metadata:
   name: color-race-game-prod
   namespace: platform-argocd
+  labels:
+    app.kubernetes.io/instance: color-race-game-app-of-apps
 spec:
   destination:
     name: ''
