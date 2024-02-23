@@ -1,0 +1,12 @@
+#!/bin/env bash
+
+# Load additional functions
+source lib/display_message.sh
+source lib/run_command.sh
+
+# Install Operator
+display_message "show-date" "INFO" "Platform ArgoCD" "Applying kustomize resources"
+run_command -- oc apply -k ../kustomize/platform-argocd
+
+# End of checks
+display_message "show-date" "INFO" "Platform ArgoCD" "All systems are go for Platform ArgoCD!"
