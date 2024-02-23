@@ -9,3 +9,6 @@ patches:
 namespace: color-race-game-test
 nameSuffix:
   -test
+
+commonLabels:
+  app.kubernetes.io/instance: color-race-game-test
