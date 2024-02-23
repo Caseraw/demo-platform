@@ -23,3 +23,28 @@ spec:
       kind: '*'
   sourceRepos:
     - '*'
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: platform
+  namespace: openshift-gitops
+  labels:
+    app.kubernetes.io/instance: openshift-gitops
+spec:
+  clusterResourceBlacklist:
+    - group: ''
+      kind: ''
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  description: platform
+  destinations:
+    - name: '*'
+      namespace: '*'
+      server: '*'
+  namespaceResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  sourceRepos:
+    - '*'

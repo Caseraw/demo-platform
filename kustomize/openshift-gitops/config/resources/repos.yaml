@@ -2,15 +2,12 @@
 kind: Secret
 apiVersion: v1
 metadata:
-  name: github-platform-repo-cluster-config
-  namespace: openshift-gitops
+  name: github-platform-repo-platform-argocd
+  namespace: platform-argocd
   labels:
-    argocd.argoproj.io/secret-type: repository
-    app.kubernetes.io/instance: openshift-gitops
+    argocd.argoproj.io/secret-type: repo-creds
   annotations:
     managed-by: argocd.argoproj.io
 data:
-  project: Y2x1c3Rlci1jb25maWc=
-  type: Z2l0
   url: aHR0cHM6Ly9naXRodWIuY29tL0Nhc2VyYXcvZGVtby1wbGF0Zm9ybS5naXQ=
 type: Opaque

@@ -9,7 +9,7 @@ spec:
     name: ''
     namespace: openshift-gitops
     server: 'https://kubernetes.default.svc'
-  project: cluster-config
+  project: platform
   source:
     path: kustomize/platform-argocd
     repoURL: 'https://github.com/Caseraw/demo-platform.git'
