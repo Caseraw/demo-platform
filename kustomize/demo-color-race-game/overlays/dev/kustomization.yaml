@@ -8,6 +8,3 @@ patches:
 
 namespace: color-race-game-dev
 nameSuffix: "-dev"
-
-commonLabels:
-  app.kubernetes.io/instance: color-race-game-dev

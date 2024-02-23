@@ -8,6 +8,3 @@ patches:
 
 namespace: color-race-game-prod
 nameSuffix: "-prod"
-
-commonLabels:
-  app.kubernetes.io/instance: color-race-game-prod
