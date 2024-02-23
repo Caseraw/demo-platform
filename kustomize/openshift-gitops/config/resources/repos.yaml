@@ -3,7 +3,7 @@ kind: Secret
 apiVersion: v1
 metadata:
   name: github-platform-repo-platform-argocd
-  namespace: platform-argocd
+  namespace: openshift-gitops
   labels:
     argocd.argoproj.io/secret-type: repo-creds
   annotations:
