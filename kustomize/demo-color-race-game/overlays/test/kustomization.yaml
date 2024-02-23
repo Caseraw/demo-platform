@@ -7,8 +7,7 @@ patches:
   - path: patches/route.yaml
 
 namespace: color-race-game-test
-nameSuffix:
-  -test
+nameSuffix: "-test"
 
 commonLabels:
   app.kubernetes.io/instance: color-race-game-test
