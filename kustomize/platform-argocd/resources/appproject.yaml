@@ -1,0 +1,48 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: platform
+  labels:
+    app.kubernetes.io/instance: platform-argocd
+spec:
+  clusterResourceBlacklist:
+    - group: ''
+      kind: ''
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  description: platform
+  destinations:
+    - name: '*'
+      namespace: '*'
+      server: '*'
+  namespaceResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  sourceRepos:
+    - '*'
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: color-race-game
+  labels:
+    app.kubernetes.io/instance: platform-argocd
+spec:
+  clusterResourceBlacklist:
+    - group: ''
+      kind: ''
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  description: color-race-game
+  destinations:
+    - name: '*'
+      namespace: '*'
+      server: '*'
+  namespaceResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  sourceRepos:
+    - '*'

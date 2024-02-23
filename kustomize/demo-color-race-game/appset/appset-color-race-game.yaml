@@ -1,0 +1,30 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: color-race-game-application-set
+  namespace: platform-argocd
+spec:
+  generators:
+    - list:
+        elements:
+          - name: dev
+            namespace: color-race-game-dev
+          - name: test
+            namespace: color-race-game-test
+          - name: acc
+            namespace: color-race-game-acc
+          - name: prod
+            namespace: color-race-game-prod
+  template:
+    metadata:
+      name: 'color-race-game-{{name}}'
+    spec:
+      project: color-race-game
+      source:
+        repoURL: 'https://github.com/Caseraw/demo-platform.git'
+        targetRevision: HEAD
+        path: 'kustomize/demo-color-race-game/overlays/{{name}}'
+      destination:
+        server: 'https://kubernetes.default.svc'
+        namespace: '{{namespace}}'

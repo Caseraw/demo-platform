@@ -1,0 +1,16 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: color-race-game-app-of-apps
+  namespace: platform-argocd
+spec:
+  destination:
+    name: ''
+    namespace: platform-argocd
+    server: 'https://kubernetes.default.svc'
+  project: color-race-game
+  source:
+    path: kustomize/demo-color-race-game/app-of-apps
+    repoURL: 'https://github.com/Caseraw/demo-platform.git'
+    targetRevision: HEAD
