@@ -1,0 +1,11 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: grafana-community-instance
+  labels:
+    kubernetes.io/metadata.name: grafana-community-instance
+    openshift.io/cluster-monitoring: "false"
+  annotations:
+    openshift.io/description: Grafana Community Instance
+    openshift.io/display-name: Grafana Community Instance

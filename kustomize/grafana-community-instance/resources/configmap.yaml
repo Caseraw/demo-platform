@@ -1,0 +1,8 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cabundle
+  namespace: grafana-community-instance
+  labels:
+    config.openshift.io/inject-trusted-cabundle: "true"

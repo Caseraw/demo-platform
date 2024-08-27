@@ -1,0 +1,30 @@
+---
+apiVersion: grafana.integreatly.org/v1beta1
+kind: Grafana
+metadata:
+  name: grafana
+  namespace: grafana-community-instance
+  labels:
+    dashboards: grafana
+    folders: grafana
+    grafana-instance: grafana-community-instance
+spec:
+  config:
+    auth:
+      disable_login_form: 'false'
+    log:
+      mode: console
+    security:
+      admin_password: start
+      admin_user: root
+  route:
+    spec:
+      port:
+        targetPort: grafana
+      tls:
+        termination: edge
+      to:
+        kind: Service
+        name: grafana-service
+        weight: 100
+      wildcardPolicy: None

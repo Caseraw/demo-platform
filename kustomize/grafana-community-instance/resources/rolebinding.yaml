@@ -1,0 +1,42 @@
+# ---
+# apiVersion: rbac.authorization.k8s.io/v1
+# kind: RoleBinding
+# metadata:
+#   name: grafana-view
+#   namespace: grafana-community-instance
+# roleRef:
+#   apiGroup: rbac.authorization.k8s.io
+#   kind: ClusterRole
+#   name: view
+# subjects:
+# - kind: ServiceAccount
+#   name: grafana-community-instance-sa
+#   namespace: grafana-community-instance
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: grafana-edit
+  namespace: grafana-community-instance
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: edit
+subjects:
+- kind: ServiceAccount
+  name: grafana-community-instance-sa
+  namespace: grafana-community-instance
+# ---
+# apiVersion: rbac.authorization.k8s.io/v1
+# kind: RoleBinding
+# metadata:
+#   name: grafana-admin
+#   namespace: grafana-community-instance
+# roleRef:
+#   apiGroup: rbac.authorization.k8s.io
+#   kind: ClusterRole
+#   name: admin
+# subjects:
+# - kind: ServiceAccount
+#   name: grafana-community-instance-sa
+#   namespace: grafana-community-instance

@@ -1,0 +1,59 @@
+---
+apiVersion: grafana.integreatly.org/v1beta1
+kind: GrafanaDatasource
+metadata:
+  name: openshift-monitoring-thanos-querier-datasource
+  namespace: grafana-community-instance
+spec:
+  instanceSelector:
+    matchLabels:
+      grafana-instance: grafana-community-instance
+  valuesFrom:
+    - targetPath: "secureJsonData.httpHeaderValue1"
+      valueFrom:
+        secretKeyRef:
+          name: grafana-community-instance-sa-token
+          key: token
+  datasource:
+    name: local-ocp-mon-thanos
+    type: prometheus
+    url: 'https://thanos-querier.openshift-monitoring.svc.cluster.local:9091'
+    access: proxy
+    editable: true
+    isDefault: true
+    jsonData:
+      httpHeaderName1: 'Authorization'
+      timeInterval: 5s
+      tlsSkipVerify: true
+    secureJsonData:
+      httpHeaderValue1: 'Bearer ${token}'
+# ---
+# apiVersion: grafana.integreatly.org/v1beta1
+# kind: GrafanaDatasource
+# metadata:
+#   name: openshift-monitoring-thanos-querier-rules-datasource
+#   namespace: grafana-community-instance
+# spec:
+#   instanceSelector:
+#     matchLabels:
+#       grafana-instance: grafana-community-instance
+#   valuesFrom:
+#     - targetPath: "secureJsonData.httpHeaderValue1"
+#       valueFrom:
+#         secretKeyRef:
+#           name: grafana-community-instance-sa-token
+#           key: token
+#   datasource:
+#     name: local-ocp-mon-thanos-rules
+#     type: prometheus
+#     url: 'https://thanos-querier.openshift-monitoring.svc.cluster.local:9092'
+#     access: proxy
+#     editable: true
+#     isDefault: false
+#     jsonData:
+#       httpHeaderName1: 'Authorization'
+#       timeInterval: 5s
+#       tlsSkipVerify: true
+#       customQueryParameters: "namespace=grafana-community-instance"
+#     secureJsonData:
+#       httpHeaderValue1: 'Bearer ${token}'

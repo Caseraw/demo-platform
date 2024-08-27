@@ -1,0 +1,13 @@
+---
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  name: grafana-community-operator
+  namespace: grafana-community-operator
+  annotations:
+    olm.providedAPIs: Grafana.v1beta1.grafana.integreatly.org,GrafanaAlertRuleGroup.v1beta1.grafana.integreatly.org,GrafanaContactPoint.v1beta1.grafana.integreatly.org,GrafanaDashboard.v1beta1.grafana.integreatly.org,GrafanaDatasource.v1beta1.grafana.integreatly.org,GrafanaFolder.v1beta1.grafana.integreatly.org
+spec:
+  targetNamespaces:
+  - grafana-community-operator
+  - grafana-community-instance
+  upgradeStrategy: Default

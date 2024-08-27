@@ -1,0 +1,15 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - resources/namespace.yaml
+  - resources/grafana.yaml
+  - resources/serviceaccount.yaml
+  - resources/clusterrolebinding.yaml
+  - resources/rolebinding.yaml
+  - resources/secret.yaml
+  - resources/configmap.yaml
+  - resources/grafanadatasource.yaml
+  - resources/grafanadashboard.yaml
+
+# namespace: grafana-community-instance
