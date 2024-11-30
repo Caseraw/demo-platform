@@ -41,7 +41,6 @@ RUN wget -O helm.tar.gz https://get.helm.sh/helm-v3.14.2-linux-amd64.tar.gz && \
     cp helm_bash_completion /etc/bash_completion.d/ && \
     rm -rf helm.tar.gz linux-amd64
 
-# Add .bashrc file to user's home directory
-COPY files/.bashrc /root/.bashrc
+USER ubuntu
 
-USER root
+COPY files/.bashrc $HOME/.bashrc

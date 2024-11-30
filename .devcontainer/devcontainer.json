@@ -18,6 +18,15 @@
 			"terminal.integrated.shell.linux": "/bin/bash"
 		}
 	  },
-	// "postCreateCommand": "bash scripts/postcommands.sh",
-    "remoteUser": "root"
+	"postCreateCommand": "bash scripts/postcommands.sh",
+	"runArgs": [
+		"--userns=keep-id",
+		"--security-opt=label=disable"
+	],
+	"containerUser": "ubuntu",
+	"updateRemoteUserUID": true,
+	"containerEnv": {
+		"HOME": "/home/ubuntu"
+	},
+    "remoteUser": "ubuntu"
 }
